@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QOC</title>
+</head>
+<body>
+<ol>
+    <li><strong>Should route way (going/coming) be handled?</strong>
+        <ul>
+            <li>Option 1: All route info should be contained in a single
+            view.</li>
+            <li>Option 2: The two routes should be separate, but linked.</li>
+            <li>Option 3: The two routes should be separate and not linked.</li>
+            <li>Criteria 1: maintain a simple interface (positive: O3)</li>
+            <li>Criteria 2: keep related information near (positive: O1,
+            O2)</li>
+            <li>Criteria 3: have a flexible interface (positive: O3)</li>
+            <li>Criteria 4: don't repeat similar information (positive: O1)</li>
+            <li>I chose option 3 because this is more flexible: even though
+            the source and destination are related the transportation vehicles
+            might be different.</li>
+        </ul>
+    </li>
+
+    <li><strong>What should happen with the main at the first startup when no
+    routes are set?</strong>
+        <ul>
+            <li>Option 1: Display nothing.</li>
+            <li>Option 2: Display nothing, but show a popup that instructs the
+            user where routes are added.</li>
+            <li>Option 3: Have a button for adding a new route.</li>
+            <li>Option 4: Have text that informs the user how routes are
+            added.</li>
+            <li>Criteria 1: do not nag the user (positive: O1, O3, O4)</li>
+            <li>Criteria 2: inform the user on how to use the app (positive: O2,
+            O4)</li>
+            <li>Criteria 3: get the user started right away (positive: O3)</li>
+            <li>I chose option 4 because this way the user learns who to use the
+            application as well.</li>
+        </ul>
+    </li>
+
+    <li><strong>How should the information coming from a Facebook event be
+    handled?</strong>
+        <ul>
+            <li>Option 1: It should be displayed in the route view, but it
+            shouldn't be editable.</li>
+            <li>Option 2: It should be displayed in the route view and it should
+            be editable.</li>
+            <li>Option 3: It shouldn't be displayed in the route view.</li>
+            <li>Criteria 1: Display all the relevant information to the user
+            (positive: O1, O2)</li>
+            <li>Criteria 2: Block the user from changing linked information
+            (positive: O1, O3)</li>
+            <li>I chose option 1 because such info might be updated from
+            Facebook.</li>
+        </ul>
+    </li>
+
+    <li><strong>How should a Facebook account be used?</strong>
+        <ul>
+            <li>Option 1: Require connecting to Facebook for the application to
+            work.</li>
+            <li>Option 2: Connecting to Facebook optional (only display the
+            option in the settings).</li>
+            <li>Option 3: Connecting to Facebook optional (show the view at
+            first run).</li>
+            <li>Option 4: Don't use Facebook at all.</li>
+            <li>Criteria 1: use all possible features of the app (positive: O1,
+            O2, O3)</li>
+            <li>Criteria 2: respect the user's right to use the application how
+            he wants to (positive: O2, O3, O4)</li>
+            <li>Criteria 3: let the user know all the features (positive: O1,
+            O3, O4)</li>
+            <li>Criteria 4: don't nag the user (positive: O2, O4)</li>
+            <li>I chose option 3 to get the user informed about the feature but
+            to not require him to use.</li>
+        </ul>
+    </li>
+</ol>
+</body>
+</html>
