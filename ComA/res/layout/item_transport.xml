@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/dragHandlerIv"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="#000000"
+            android:contentDescription="@string/desc_none"
+            android:src="@android:drawable/ic_dialog_dialer" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/desc_none"
+            android:src="@drawable/normal_bus" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/transportNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/text_transport_size" />
+
+            <TextView
+                android:id="@+id/transportOtherInfoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/text_transport_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp" >
+
+        <ImageView
+            android:layout_width="@dimen/transport_station_size"
+            android:layout_height="@dimen/transport_station_size"
+            android:layout_gravity="center_vertical"
+            android:background="#000000"
+            android:contentDescription="@string/desc_none"
+            android:src="@android:drawable/ic_media_previous" />
+
+        <TextView
+            android:id="@+id/startStationTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_transport_size" />
+
+        <ImageView
+            android:layout_width="@dimen/transport_station_size"
+            android:layout_height="@dimen/transport_station_size"
+            android:layout_gravity="center_vertical"
+            android:background="#000000"
+            android:contentDescription="@string/desc_none"
+            android:src="@android:drawable/ic_media_next" />
+
+        <TextView
+            android:id="@+id/endStationTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_transport_size" />
+    </LinearLayout>
+
+</LinearLayout>
+
+<!-- <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="4"
+    android:orientation="horizontal" >
+
+</GridLayout> -->

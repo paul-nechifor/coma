@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/itemSeparatorTv"
+        android:textIsSelectable="false"
+        android:textAllCaps="true"
+		android:textSize="14sp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/separator_setting_horizontal_padding"
+		android:paddingBottom="@dimen/separator_setting_horizontal_padding"
+		android:paddingLeft="@dimen/setting_vertical_padding"
+		android:paddingRight="@dimen/setting_vertical_padding"
+		android:background="@color/separator_background" />
+
+</LinearLayout>

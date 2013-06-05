@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/basic_background"
+    android:orientation="vertical"
+    android:padding="@dimen/route_padding" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_location_from"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_setting_size" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/map_border_color"
+        android:padding="@dimen/route_locations_map_padding" >
+
+        <ImageView
+            android:id="@+id/fromMapIv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/route_locations_map_size"
+            android:background="@color/basic_background"
+            android:contentDescription="@string/desc_location_from" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/fromAddressTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_setting_size" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/route_padding" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_location_to"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_setting_size" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/map_border_color"
+        android:padding="@dimen/route_locations_map_padding" >
+
+        <ImageView
+            android:id="@+id/toMapIv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/route_locations_map_size"
+            android:background="@color/basic_background"
+            android:contentDescription="@string/desc_location_to" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/toAddressTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_setting_size" />
+
+</LinearLayout>

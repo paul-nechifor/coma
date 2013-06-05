@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="menu_item_size">48dp</dimen>
+    <dimen name="menu_text_size">24dp</dimen>
+    <dimen name="menu_symbol_size">44dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="pre_separator_margin">32dp</dimen>
+    <dimen name="setting_vertical_padding">14dp</dimen>
+    <dimen name="text_setting_horizontal_padding">12dp</dimen>
+    <dimen name="separator_setting_horizontal_padding">2dp</dimen>
+    <dimen name="map_margin">6dp</dimen>
+    <dimen name="text_setting_size">22sp</dimen>
+    <dimen name="text_setting_small_size">16sp</dimen>
+    <dimen name="button_char_text_size">30sp</dimen>
+    <dimen name="date_text_size">38dp</dimen>
+    <dimen name="date_height">38dp</dimen>
+    <dimen name="date_digit_width">20dp</dimen>
+    <dimen name="date_inner_space">0dp</dimen>
+    <dimen name="date_outer_space">5dp</dimen>
+    <dimen name="axis_height">38dp</dimen>
+    <dimen name="axis_line_height">4dp</dimen>
+    <dimen name="axis_padding">8dp</dimen>
+    <dimen name="route_vertical_margin">3dp</dimen>
+    <dimen name="route_horizontal_margin">6dp</dimen>
+    <dimen name="route_padding">8dp</dimen>
+    <dimen name="text_transport_size">18sp</dimen>
+    <dimen name="transport_station_size">18sp</dimen>
+    <dimen name="route_locations_map_padding">4dp</dimen>
+    <dimen name="route_locations_map_size">120dp</dimen>
+    <dimen name="text_statistics_separator_size">14sp</dimen>
+    <dimen name="icon_label_size">40sp</dimen>
+    
+</resources>

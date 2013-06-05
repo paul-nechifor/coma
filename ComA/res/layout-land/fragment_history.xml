@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/basic_background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+	    <ro.minimul.coma.stats.HistoryControllerView
+	        android:id="@+id/historyControllerView"
+	        android:layout_width="0dp"
+	        android:layout_weight="6"
+	        android:layout_height="wrap_content"        
+	        />
+	    
+	    <ro.minimul.coma.stats.HistoryAxisView
+	        android:id="@+id/historyAxisView"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+	        android:layout_height="wrap_content"        
+	        />
+	    
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/menu_a" />
+    
+    <fragment
+        android:id="@+id/historyMapFragment"
+        class="ro.minimul.coma.fragment.HistoryMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

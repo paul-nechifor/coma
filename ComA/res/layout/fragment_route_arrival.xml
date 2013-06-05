@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/basic_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="@dimen/route_padding"
+	    android:orientation="vertical" >
+	    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+    
+	        <TextView
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical"
+	            android:layout_weight="20"
+	            android:text="@string/label_arrival_time"
+	            android:textIsSelectable="false"
+	            android:textSize="@dimen/text_setting_size" />
+	    
+	        <TimePicker
+	            android:id="@+id/timeTp"
+	            android:layout_width="0dp"
+	            android:layout_height="135dp"
+	            android:layout_gravity="left"
+	            android:layout_weight="80" />
+            
+        </LinearLayout>
+	    	
+	    <CheckBox
+	        android:id="@+id/repeatCb"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/text_setting_size"
+	        android:text="@string/checkbox_repeat" />
+	    
+        <LinearLayout
+            android:id="@+id/fixedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+	        
+		    <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="20"
+	            android:text="@string/label_arrival_date"
+	            android:textIsSelectable="false"
+	            android:textSize="@dimen/text_setting_size" />
+	
+		    <DatePicker
+		        android:id="@+id/dateDp"
+                android:layout_width="0dp"
+                android:layout_height="135dp"
+                android:layout_gravity="left"
+                android:layout_weight="80" />
+	    
+        </LinearLayout>
+	    
+	    <LinearLayout
+	        android:id="@+id/weekdayList"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	    
+		    <ToggleButton
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:textOff="@string/short_week_name_0"
+		        android:textOn="@string/short_week_name_0" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_1"
+                android:textOn="@string/short_week_name_1" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_2"
+                android:textOn="@string/short_week_name_2" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_3"
+                android:textOn="@string/short_week_name_3" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_4"
+                android:textOn="@string/short_week_name_4" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_5"
+                android:textOn="@string/short_week_name_5" />
+        
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textOff="@string/short_week_name_6"
+                android:textOn="@string/short_week_name_6" />
+            
+        </LinearLayout>
+	
+	</LinearLayout>
+	
+</ScrollView>
