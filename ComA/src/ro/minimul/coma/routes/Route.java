@@ -2,10 +2,15 @@ package ro.minimul.coma.routes;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import ro.minimul.coma.prefs.AppPrefs;
 import ro.minimul.coma.util.NamedLatLng;
+import com.google.android.gms.maps.model.LatLng;
 
 public class Route implements Serializable {
     private static final long serialVersionUID = 8769437991581756094L;
+    
+    private Route() {
+    }
     
     private String id;
     private boolean added = false;
@@ -14,9 +19,21 @@ public class Route implements Serializable {
     private boolean repeatWeekly = true;
     private Calendar arrival = Calendar.getInstance();
     private final boolean[] repeatingDays = new boolean[7];
+    private RouteData routeData;
     
     public static Route newEmptyRoute() {
-        return new Route();
+        Route ret = new Route();
+        
+        AppPrefs prefs = AppPrefs.getGlobalInstance();
+        
+        LatLng last = prefs.getLastInputLocationLatLng();
+        
+        ret.from.setLatLng(last);
+        ret.to.setLatLng(last);
+        
+        ret.repeatingDays[0] = true;
+        
+        return ret;
     }
     
     public void setAddedId(String id) {
@@ -44,11 +61,23 @@ public class Route implements Serializable {
         return repeatWeekly;
     }
     
+    public void setRepeatingWeekly(boolean value) {
+        this.repeatWeekly = value;
+    }
+    
     public Calendar getArrival() {
         return arrival;
     }
     
     public boolean[] getRepeatingDays() {
         return repeatingDays;
+    }
+    
+    public void setRouteData(RouteData routeData) {
+        this.routeData = routeData;
+    }
+    
+    public RouteData getRouteData() {
+        return this.routeData;
     }
 }

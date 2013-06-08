@@ -3,8 +3,10 @@ package ro.minimul.coma.fragment;
 import ro.minimul.coma.R;
 import ro.minimul.coma.activity.ChooseLocationActivity.OnLocationChoosenCallback;
 import ro.minimul.coma.activity.MainActivity;
+import ro.minimul.coma.activity.MainActivity.OnFacebookLoginCallback;
 import ro.minimul.coma.dialog.SleepIntervalDialog;
 import ro.minimul.coma.prefs.AppPrefs;
+import ro.minimul.coma.prefs.FacebookLoginSetting;
 import ro.minimul.coma.prefs.LineSeparator;
 import ro.minimul.coma.prefs.NamedSeparator;
 import ro.minimul.coma.prefs.SettingItem;
@@ -28,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class SettingsFragment extends Fragment {
     private SettingItem[] settingItems;
+    private MainActivity mainActivity;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -35,7 +38,7 @@ public class SettingsFragment extends Fragment {
         View ret = inflater.inflate(R.layout.fragment_settings, container,
                 false);
 
-        final MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity = (MainActivity) getActivity();
         final AppPrefs prefs = mainActivity.getPrefs();
         
         // Register account ////////////////////////////////////////////////////
@@ -54,22 +57,28 @@ public class SettingsFragment extends Fragment {
         // Login into Facebook /////////////////////////////////////////////////
         SettingListener loginIntoFacebook = new SettingListener() {
             @Override
-            public void onSelected(SettingItem item) {
-                mainActivity.showLoginForFacebook();
+            public void onSelected(final SettingItem item) {
+                mainActivity.loginToFacebook(new OnFacebookLoginCallback() {
+                    @Override
+                    public void onFacebookLogin() {
+                        item.updateSelf();
+                    }
+                });
             }
         };
-        IValue loginIntoFacebookValue = new IValue() {
-            @Override
-            public String getValue(SettingItem item) {
-                if (prefs.facebookEmail == null) {
-                    return mainActivity.getString(
-                            R.string.facebook_not_connected);
-                } else {
-                    return mainActivity.getString(R.string.facebook_connected,
-                            prefs.facebookEmail);
-                }
-            }
-        };
+        
+//        IValue loginIntoFacebookValue = new IValue() {
+//            @Override
+//            public String getValue(SettingItem item) {
+//                if (prefs.facebookEmail == null) {
+//                    return mainActivity.getString(
+//                            R.string.facebook_not_connected);
+//                } else {
+//                    return mainActivity.getString(R.string.facebook_connected,
+//                            prefs.facebookEmail);
+//                }
+//            }
+//        };
 
         // Home location ///////////////////////////////////////////////////////
         SettingListener homeLocation = new SettingListener() {
@@ -167,8 +176,10 @@ public class SettingsFragment extends Fragment {
             new TextSettingWithValue(R.string.label_register_account,
                     registerAccount, regsiterAccountValue),
             new LineSeparator(),
-            new TextSettingWithValue(R.string.label_login_into_facebook,
-                    loginIntoFacebook, loginIntoFacebookValue),
+//            new TextSettingWithValue(R.string.label_login_into_facebook,
+//                    loginIntoFacebook, loginIntoFacebookValue),
+            new FacebookLoginSetting(R.string.label_login_into_facebook,
+                    loginIntoFacebook),
             new NamedSeparator(R.string.label_locations),
             new TextSettingWithMap(R.string.label_home_location,
                     homeLocation, homeLocationValue, mainActivity),

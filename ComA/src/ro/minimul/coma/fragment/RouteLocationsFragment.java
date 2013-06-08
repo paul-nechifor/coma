@@ -57,6 +57,8 @@ public class RouteLocationsFragment extends Fragment {
                     return;
                 }
                 
+                activity.setSomethingChanged(true);
+                
                 namedLatLng.setLatLng(location, getActivity());
                 
                 textView.setText(namedLatLng.getAddress());

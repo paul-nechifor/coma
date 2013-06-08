@@ -71,6 +71,7 @@
 	        android:orientation="horizontal" >
 	    
 		    <ToggleButton
+		        android:id="@+id/week0Tb"
 		        android:layout_width="0dp"
 		        android:layout_weight="1"
 		        android:layout_height="wrap_content"
@@ -78,6 +79,7 @@
 		        android:textOn="@string/short_week_name_0" />
         
             <ToggleButton
+                android:id="@+id/week1Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -85,6 +87,7 @@
                 android:textOn="@string/short_week_name_1" />
         
             <ToggleButton
+                android:id="@+id/week2Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -92,6 +95,7 @@
                 android:textOn="@string/short_week_name_2" />
         
             <ToggleButton
+                android:id="@+id/week3Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -99,6 +103,7 @@
                 android:textOn="@string/short_week_name_3" />
         
             <ToggleButton
+                android:id="@+id/week4Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -106,6 +111,7 @@
                 android:textOn="@string/short_week_name_4" />
         
             <ToggleButton
+                android:id="@+id/week5Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -113,6 +119,7 @@
                 android:textOn="@string/short_week_name_5" />
         
             <ToggleButton
+                android:id="@+id/week6Tb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

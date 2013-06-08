@@ -2,6 +2,7 @@ package ro.minimul.coma.activity;
 
 import ro.minimul.coma.R;
 import ro.minimul.coma.fragment.LocationMapFragment;
+import ro.minimul.coma.prefs.AppPrefs;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +30,8 @@ public class ChooseLocationActivity extends Activity {
                 getIntent().getDoubleExtra(LATITUDE, 0), 
                 getIntent().getDoubleExtra(LONGITUDE, 0));
         
-        mapFragment = (LocationMapFragment) getFragmentManager().findFragmentById(
-                R.id.mapFragment);
+        mapFragment = (LocationMapFragment) getFragmentManager()
+                .findFragmentById(R.id.mapFragment);
         
         mapFragment.setLocation(initialLocation);
     }
@@ -62,6 +63,8 @@ public class ChooseLocationActivity extends Activity {
     }
     
     private void onBackSelected() {
+        rememberLastLocation();
+        
         finish();
     }
     
@@ -81,6 +84,14 @@ public class ChooseLocationActivity extends Activity {
         result.putExtra(LONGITUDE, location.longitude);
         
         setResult(Activity.RESULT_OK, result);
+        
+        rememberLastLocation();
+        
         finish();
+    }
+    
+    private void rememberLastLocation() {
+        AppPrefs app = AppPrefs.getGlobalInstance();
+        app.setLastInputLocation(mapFragment.getLastPosition());
     }
 }

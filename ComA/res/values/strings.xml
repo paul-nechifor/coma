@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">ComA</string>
+    <string name="applicationId">387068164745414</string>
     
     <string name="menu_home_icon">⌂</string>
     <string name="menu_routes_icon"></string>
@@ -31,6 +32,7 @@
     <string name="label_accounts">Account</string>
     <string name="label_register_account">Register account</string>
     <string name="label_login_into_facebook">Login into Facebook</string>
+    <string name="label_login_into_facebook2">Facebook account (logout)</string>
     <string name="label_locations">Locations</string>
     <string name="label_home_location">Home location</string>
     <string name="label_work_location">Work location</string>
@@ -90,5 +92,11 @@
     <string name="label_delete">Delete</string>
     
     <string name="desc_none"></string>
+    
+    <string name="label_computing_path">Computing path&#8230;</string>
+    <string name="label_problems_computing_path">Problems computing path.</string>
+    <string name="train_simulator_name">Simulator</string>
+    <string name="menuitem_lock">Lock</string>
+    <string name="menuitem_unlock">Unlock</string>
     
 </resources>

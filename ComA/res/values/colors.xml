@@ -11,4 +11,7 @@
     <color name="menu_b">#c6a97a</color>
     <color name="map_border_color">#d9cdbb</color>
     
+    <color name="start_color">#44CC44</color>
+    <color name="end_color">#CF4040</color>
+    
 </resources>

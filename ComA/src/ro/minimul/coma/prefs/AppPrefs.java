@@ -20,6 +20,8 @@ import com.google.android.gms.maps.model.LatLng;
 public class AppPrefs implements Serializable {
     private static final long serialVersionUID = 4756619801096157080L;
     
+    private static AppPrefs GLOBAL_INSTANCE = null;
+    
     public boolean firstStart = true;
     
     public boolean connectedToFacebook;
@@ -117,6 +119,7 @@ public class AppPrefs implements Serializable {
             in = new ObjectInputStream(base64InputStream);
             AppPrefs prefs = (AppPrefs) in.readObject();
             prefs.restoreTransientFields();
+            GLOBAL_INSTANCE = prefs;
             return prefs;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -136,5 +139,9 @@ public class AppPrefs implements Serializable {
         if (routes == null) {
             routes = new HashMap<String, Route>();
         }
+    }
+    
+    public static AppPrefs getGlobalInstance() {
+        return GLOBAL_INSTANCE;
     }
 }

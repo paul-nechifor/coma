@@ -13,9 +13,9 @@ import ro.minimul.coma.menu.MenuView.OnTabSelectedListener;
 import ro.minimul.coma.menu.MenuViewOption;
 import ro.minimul.coma.prefs.AppPrefs;
 import ro.minimul.coma.routes.Route;
+import ro.minimul.coma.routes.TransportJsonData;
 import ro.minimul.coma.service.ComaService;
 import ro.minimul.coma.util.NamedLatLng;
-import ro.minimul.coma.util.Util;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Fragment;
@@ -29,6 +29,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Window;
+import com.facebook.LoggingBehavior;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.Settings;
 import com.google.android.gms.maps.model.LatLng;
 
 public class MainActivity extends Activity implements OnTabSelectedListener {
@@ -40,6 +44,10 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
         new MenuViewOption(R.string.menu_settings_icon, R.string.menu_settings),
     };
     
+    public static interface OnFacebookLoginCallback {
+        public void onFacebookLogin();
+    }
+    
     private static final String[] FRAGMENT_TAGS = {
         "homeFragment",
         "routesFragment",
@@ -48,7 +56,7 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
         "settingsFragment",
     };
     
-    private static final int FACEBOOK_LOGIN = 0;
+//    private static final int FACEBOOK_LOGIN = 0;
     private static final int CHOOSE_LOCATION = 1;
     private static final int ROUTE_EDITOR = 2;
     
@@ -57,11 +65,9 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
     private int currentTabIndex = -1;
     
     private OnLocationChoosenCallback onLocationChoosenCallback;
+    private OnFacebookLoginCallback onFacebookLoginCallback;
     
     private Fragment[] tabFragments;
-    
-    @SuppressWarnings("unused")
-    private Map<String, float[]> edges;
     
     public AppPrefs getPrefs() {
         return prefs;
@@ -89,27 +95,45 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
         tryToRecoverTabFragments();
         setupInitialTab();
         
-        try {
-            edges = Util.getEdges(this);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+        setupFacebook(savedInstanceState);
+        
+        loadJsonData();
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        
+        Session.getActiveSession().addCallback(statusCallback);
     }
 
     @Override
     protected void onStop(){
+        Session.getActiveSession().removeCallback(statusCallback);
+        
         storePrefs();
         
         super.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Session session = Session.getActiveSession();
+        Session.saveSession(session, outState);
     }
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Session.getActiveSession().onActivityResult(this, requestCode,
+                resultCode, data);
+        
         switch (requestCode) {
-        case (FACEBOOK_LOGIN):
-            onFacebookLoginResult(resultCode, data);
-            break;
+//        case (FACEBOOK_LOGIN):
+//            onFacebookLoginResult(resultCode, data);
+//            break;
         case (CHOOSE_LOCATION):
             onChooseLocationResult(resultCode, data);
             break;
@@ -117,6 +141,10 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
             onRouteEditorResult(resultCode, data);
             break;
         }
+    }
+    
+    private void loadJsonData() {
+        TransportJsonData.loadGlobalInstance(this);
     }
     
     public void erasePreferencesAndRestart() {
@@ -165,10 +193,24 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
         startActivityForResult(intent, CHOOSE_LOCATION);
     }
     
-    public void showLoginForFacebook() {
-        Intent intent = new Intent(this, FacebookLoginActivity.class);
-        startActivityForResult(intent, FACEBOOK_LOGIN);
+    public void loginToFacebook(OnFacebookLoginCallback callback) {
+        this.onFacebookLoginCallback = callback;
+        
+        Session session = Session.getActiveSession();
+        
+        if (session != null && session.isOpened()) {
+            onClickLogout();
+            System.out.println("LOG OUT");
+        } else {
+            onClickLogin();
+            System.out.println("LOG IN");
+        }
     }
+    
+//    public void showLoginForFacebook() {
+//        Intent intent = new Intent(this, FacebookLoginActivity.class);
+//        startActivityForResult(intent, FACEBOOK_LOGIN);
+//    }
     
     public void showRouteEditor(Route route) {
         Intent intent = new Intent(this, RouteSelectionActivity.class);
@@ -176,12 +218,12 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
         startActivityForResult(intent, ROUTE_EDITOR);
     }
     
-    private void onFacebookLoginResult(int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            prefs.facebookEmail = data.getStringExtra(Intent.EXTRA_EMAIL);
-            prefs.facebookPassword = data.getStringExtra(Intent.EXTRA_TEXT);
-        }
-    }
+//    private void onFacebookLoginResult(int resultCode, Intent data) {
+//        if (resultCode == Activity.RESULT_OK) {
+//            prefs.facebookEmail = data.getStringExtra(Intent.EXTRA_EMAIL);
+//            prefs.facebookPassword = data.getStringExtra(Intent.EXTRA_TEXT);
+//        }
+//    }
     
     private void onChooseLocationResult(int resultCode, Intent data) {
         LatLng location;
@@ -191,7 +233,6 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
             double longitude = data.getDoubleExtra(
                     ChooseLocationActivity.LONGITUDE, 0);
             location = new LatLng(latitude, longitude);
-            prefs.setLastInputLocation(location);
         } else {
             location = null;
         }
@@ -319,4 +360,89 @@ public class MainActivity extends Activity implements OnTabSelectedListener {
             ft.commit();
         }
     }
+    
+    /*
+     * FACEBOOK STUFF
+     */
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                Exception exception) {
+            updateView();
+        }
+    };
+    
+    @SuppressWarnings("unused")
+    private static final String URL_PREFIX_FRIENDS =
+            "https://graph.facebook.com/me/friends?access_token=";
+    
+    private void setupFacebook(Bundle savedInstanceState) {
+        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+
+        Session session = Session.getActiveSession();
+        if (session == null) {
+            if (savedInstanceState != null) {
+                session = Session.restoreSession(this, null, statusCallback,
+                        savedInstanceState);
+            }
+            if (session == null) {
+                session = new Session(this);
+            }
+            Session.setActiveSession(session);
+            if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+                session.openForRead(new Session.OpenRequest(this).setCallback(
+                        statusCallback));
+            }
+        }
+
+        updateView();
+    }
+
+    private void updateView() {
+        Session session = Session.getActiveSession();
+        if (session.isOpened()) {
+//            textInstructionsOrLink.setText(URL_PREFIX_FRIENDS + session.getAccessToken());
+//            buttonLoginLogout.setText(R.string.logout);
+//            buttonLoginLogout.setOnClickListener(new OnClickListener() {
+//                public void onClick(View view) { onClickLogout(); }
+//            });
+        } else {
+//            textInstructionsOrLink.setText(R.string.instructions);
+//            buttonLoginLogout.setText(R.string.login);
+//            buttonLoginLogout.setOnClickListener(new OnClickListener() {
+//                public void onClick(View view) { onClickLogin(); }
+//            });
+        }
+        
+        if (onFacebookLoginCallback != null) {
+            onFacebookLoginCallback.onFacebookLogin();
+        }
+    }
+
+    private void onClickLogin() {
+        Session session = Session.getActiveSession();
+        if (!session.isOpened() && !session.isClosed()) {
+            session.openForRead(new Session.OpenRequest(this).setCallback(
+                    statusCallback));
+        } else {
+            Session.openActiveSession(this, true, statusCallback);
+        }
+    }
+
+    private void onClickLogout() {
+        Session session = Session.getActiveSession();
+        if (!session.isClosed()) {
+            session.closeAndClearTokenInformation();
+        }
+    }
 }
+
+
+/*
+SELECT eid, name, pic, creator, start_time FROM event WHERE eid IN (SELECT eid FROM event_member WHERE uid='1627826943')
+
+
+
+SELECT all_members_count,attending_count,creator,description,eid,end_time,location,name,start_time,venue FROM event WHERE eid IN (SELECT eid FROM event_member WHERE uid='1627826943')
+
+*/

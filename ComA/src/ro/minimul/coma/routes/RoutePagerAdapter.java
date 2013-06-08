@@ -1,7 +1,7 @@
 package ro.minimul.coma.routes;
 
-import ro.minimul.coma.fragment.RouteLocationsFragment;
 import ro.minimul.coma.fragment.RouteArrivalFragment;
+import ro.minimul.coma.fragment.RouteLocationsFragment;
 import ro.minimul.coma.fragment.RouteTransportFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -26,5 +26,9 @@ public class RoutePagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragments.length;
+    }
+    
+    public RouteTransportFragment getRouteTransportFragment() {
+        return (RouteTransportFragment) fragments[2];
     }
 }

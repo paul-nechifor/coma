@@ -17,7 +17,8 @@ public class LocationMapFragment extends MapFragment {
     private GoogleMap map;
     
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         View ret = super.onCreateView(inflater, container, savedInstanceState);
         
         map = getMap();

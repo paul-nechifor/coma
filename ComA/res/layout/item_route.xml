@@ -41,9 +41,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="3dp"
                     android:text="@string/begining_icon"
-                    android:textColor="#44CC44"
+                    android:textColor="@color/start_color"
                     android:textIsSelectable="false"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:textSize="@dimen/icon_label_size" />
 
                 <TextView
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center_horizontal"
+                    android:gravity="center_vertical"
                     android:textIsSelectable="false" />
             </LinearLayout>
 
@@ -67,9 +67,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="3dp"
                     android:text="@string/ending_icon"
-                    android:textColor="#CF4040"
+                    android:textColor="@color/end_color"
                     android:textIsSelectable="false"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:textSize="@dimen/icon_label_size" />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center_horizontal"
+                    android:gravity="center_vertical"
                     android:textIsSelectable="false" />
             </LinearLayout>
 
@@ -95,7 +95,9 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textIsSelectable="false" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

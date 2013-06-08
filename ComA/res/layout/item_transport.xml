@@ -2,27 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="6dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp" >
 
         <ImageView
-            android:id="@+id/dragHandlerIv"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="#000000"
-            android:contentDescription="@string/desc_none"
-            android:src="@android:drawable/ic_dialog_dialer" />
-
-        <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/transportTypeIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/desc_none"
-            android:src="@drawable/normal_bus" />
+            android:alpha="0.7"
+            android:contentDescription="@string/desc_none" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,14 +24,14 @@
 
             <TextView
                 android:id="@+id/transportNameTv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="false"
-                android:textSize="@dimen/text_transport_size" />
+                android:textSize="@dimen/text_transport_size2" />
 
             <TextView
                 android:id="@+id/transportOtherInfoTv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="false"
                 android:textSize="@dimen/text_transport_size" />
@@ -47,50 +40,49 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp" >
+        android:layout_height="wrap_content" >
 
-        <ImageView
-            android:layout_width="@dimen/transport_station_size"
-            android:layout_height="@dimen/transport_station_size"
-            android:layout_gravity="center_vertical"
-            android:background="#000000"
-            android:contentDescription="@string/desc_none"
-            android:src="@android:drawable/ic_media_previous" />
+        <TextView
+            android:id="@+id/beginingIconTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:text="@string/begining_icon"
+            android:textColor="@color/start_color"
+            android:textIsSelectable="false"
+            android:gravity="left"
+            android:textSize="@dimen/icon_label_size" />
 
         <TextView
             android:id="@+id/startStationTv"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textIsSelectable="false"
+            android:paddingRight="2dp"
+            android:gravity="left"
             android:textSize="@dimen/text_transport_size" />
-
-        <ImageView
-            android:layout_width="@dimen/transport_station_size"
-            android:layout_height="@dimen/transport_station_size"
-            android:layout_gravity="center_vertical"
-            android:background="#000000"
-            android:contentDescription="@string/desc_none"
-            android:src="@android:drawable/ic_media_next" />
 
         <TextView
             android:id="@+id/endStationTv"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textIsSelectable="false"
+            android:paddingLeft="2dp"
+            android:gravity="right"
             android:textSize="@dimen/text_transport_size" />
+
+        <TextView
+            android:id="@+id/endingIconTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="@string/ending_icon"
+            android:textColor="@color/end_color"
+            android:textIsSelectable="false"
+            android:gravity="right"
+            android:textSize="@dimen/icon_label_size" />
     </LinearLayout>
 
 </LinearLayout>
-
-<!-- <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:columnCount="4"
-    android:orientation="horizontal" >
-
-</GridLayout> -->

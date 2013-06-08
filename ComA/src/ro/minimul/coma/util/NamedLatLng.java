@@ -21,6 +21,10 @@ public class NamedLatLng implements Serializable {
         this.lng = location.longitude;
         this.address = Util.getTextAddress(context, this.lat, this.lng);
     }
+    
+    public void setLatLng(LatLng location) {
+        setLatLng(location, null);
+    }
         
     public LatLng getLatLng() {
         return new LatLng(lat, lng);

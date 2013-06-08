@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -79,6 +77,10 @@ public class Util {
     
     public static String getTextAddress(Context context, double latitude,
             double longitude) {
+        if (context == null) {
+            return getNumbersAddress(latitude, longitude);
+        }
+        
         Geocoder geoCoder = new Geocoder(context);
         
         List<Address> addresses = null;
@@ -86,10 +88,12 @@ public class Util {
         try {
             addresses = geoCoder.getFromLocation(latitude, longitude, 1);
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
         
         if (addresses == null || addresses.size() <= 0) {
-            return context.getString(R.string.could_not_resolve_address);
+            return getNumbersAddress(latitude, longitude);
+            //return context.getString(R.string.could_not_resolve_address);
         }
         
         Address address = addresses.get(0);
@@ -100,6 +104,10 @@ public class Util {
         }
         
         return text;
+    }
+    
+    private static String getNumbersAddress(double lat, double lng) {
+        return String.format(Locale.getDefault(), "%.4f %.4f", lat, lng);
     }
 
     public static Bitmap getMapImage(Context context, int width, int height,
@@ -149,31 +157,6 @@ public class Util {
             return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         }
     }
-    
-    public static Map<String, float[]> getEdges(Context context)
-            throws IOException, JSONException {
-        Map<String, float[]> ret = new HashMap<String, float[]>();
-        
-        InputStream is = context.getResources().openRawResource(R.raw.edges);
-        
-        String json = readInputStream(is);
-        JSONObject obj = new JSONObject(json);
-        
-        @SuppressWarnings("unchecked")
-        Iterator<String> iter = obj.keys();
-        
-        while (iter.hasNext()) {
-            String key = iter.next();
-            JSONArray array = (JSONArray) obj.get(key);
-            float[] fArray = new float[array.length()];
-            for (int i = 0; i < fArray.length; i++) {
-                fArray[i] = (float) array.getDouble(i);
-            }
-            ret.put(key, fArray);
-        }
-        
-        return ret;
-    }
 
     public static String readInputStream(final InputStream is)
             throws IOException {
@@ -218,5 +201,46 @@ public class Util {
         
         double d = h / 24.0;
         return String.format(Locale.getDefault(), "%.1f d", d);
+    }
+    
+    public static JSONArray getJsonArray(JSONObject o, String name) {
+        try {
+            return o.getJSONArray(name);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+    
+    public static JSONObject getJsonObject(JSONObject o, String name) {
+        try {
+            return o.getJSONObject(name);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+    
+    public static String getString(JSONObject o, String name) {
+        try {
+            return o.getString(name);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+    
+    public static float distFrom(double lat1, double lng1, double lat2,
+            double lng2) {
+        double earthRadius = 3958.75;
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                   Math.cos(Math.toRadians(lat1)) *
+                   Math.cos(Math.toRadians(lat2)) *
+                   Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double dist = earthRadius * c;
+
+        int meterConversion = 1609;
+        
+        return (float) (dist * meterConversion);
     }
 }

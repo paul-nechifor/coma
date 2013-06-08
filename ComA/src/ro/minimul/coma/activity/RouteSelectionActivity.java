@@ -1,6 +1,5 @@
 package ro.minimul.coma.activity;
 
-import com.google.android.gms.maps.model.LatLng;
 import ro.minimul.coma.R;
 import ro.minimul.coma.activity.ChooseLocationActivity.OnLocationChoosenCallback;
 import ro.minimul.coma.routes.Route;
@@ -16,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.android.gms.maps.model.LatLng;
 
 public class RouteSelectionActivity extends Activity {
     public static final String ROUTE_DATA = "ro.minimul.coma.ROUTE_DATA";
@@ -26,6 +26,8 @@ public class RouteSelectionActivity extends Activity {
     private ViewPager viewPager;
     private RoutePagerAdapter routePagerAdapter;
     private OnLocationChoosenCallback onLocationChoosenCallback;
+    private boolean somethingChanged = true;
+    private boolean routeCalculationComplete = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class RouteSelectionActivity extends Activity {
             @Override
             public void onPageSelected(int position) {
                 getActionBar().setSelectedNavigationItem(position);
+                
+                if (somethingChanged && position == 2) {
+                    routePagerAdapter.getRouteTransportFragment().computePath();
+                }
             }
         });
         
@@ -58,6 +64,10 @@ public class RouteSelectionActivity extends Activity {
             @Override
             public void onTabSelected(Tab tab, FragmentTransaction ft) {
                 viewPager.setCurrentItem(tab.getPosition());
+                
+                if (somethingChanged && tab.getPosition() == 2) {
+                    routePagerAdapter.getRouteTransportFragment().computePath();
+                }
             }
 
             @Override
@@ -106,6 +116,17 @@ public class RouteSelectionActivity extends Activity {
     }
     
     private void onDoneSelected() {
+        if (somethingChanged) {
+            viewPager.setCurrentItem(2);
+            routePagerAdapter.getRouteTransportFragment().computePath();
+            
+            return;
+        }
+        
+        if (!routeCalculationComplete) {
+            return;
+        }
+        
         Intent result = new Intent();
         result.putExtra(ROUTE_DATA, route);
         
@@ -117,8 +138,23 @@ public class RouteSelectionActivity extends Activity {
         return route;
     }
     
+    public void setSomethingChanged(boolean value) {
+        this.somethingChanged = value;
+    }
 
+    public boolean hasSomethingChanged() {
+        return this.somethingChanged;
+    }
     
+    public void setRouteCalculationComplete(boolean value) {
+        this.routeCalculationComplete = value;
+    }
+    
+    public boolean isRouteCalculationComplete() {
+        return this.routeCalculationComplete;
+    }
+    
+    // --
     
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -26,6 +26,7 @@
     <dimen name="route_horizontal_margin">6dp</dimen>
     <dimen name="route_padding">8dp</dimen>
     <dimen name="text_transport_size">18sp</dimen>
+    <dimen name="text_transport_size2">26sp</dimen>
     <dimen name="transport_station_size">18sp</dimen>
     <dimen name="route_locations_map_padding">4dp</dimen>
     <dimen name="route_locations_map_size">120dp</dimen>
