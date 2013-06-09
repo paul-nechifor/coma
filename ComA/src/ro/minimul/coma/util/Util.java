@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,6 +34,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Util {
+    private static final SimpleDateFormat SHORT_DATE_FORMAT
+        = new SimpleDateFormat("d MMM", Locale.US);
+    
     private Util() {
     }
     
@@ -242,5 +247,24 @@ public class Util {
         int meterConversion = 1609;
         
         return (float) (dist * meterConversion);
+    }
+    
+    public static String getShortTime(Calendar c) {
+        return String.format(Locale.getDefault(), "%02d:%02d",
+                c.get(Calendar.HOUR_OF_DAY),
+                c.get(Calendar.MINUTE));
+    }
+    
+    public static String getShortDate(Calendar c) {
+        return SHORT_DATE_FORMAT.format(c.getTime());
+    }
+    
+    public static int indexOfWeek(Calendar c) {
+        int calendarDayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        int myDayOfWeek = calendarDayOfWeek - 2;
+        if (myDayOfWeek < 0) {
+            myDayOfWeek += 7;
+        }
+        return myDayOfWeek;
     }
 }

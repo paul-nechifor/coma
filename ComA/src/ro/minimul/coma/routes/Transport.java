@@ -50,7 +50,7 @@ public class Transport implements Serializable {
         Transport ret = new Transport();
         
         ret.id = obj.getInt("id");
-        ret.name = obj.getString("name");
+        ret.name = obj.getString("name").replace("- ", "-");
         
         JSONArray edges = Util.getJsonArray(obj, "edges");
         if (edges != null) {

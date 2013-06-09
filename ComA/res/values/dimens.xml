@@ -32,5 +32,6 @@
     <dimen name="route_locations_map_size">120dp</dimen>
     <dimen name="text_statistics_separator_size">14sp</dimen>
     <dimen name="icon_label_size">40sp</dimen>
+    <dimen name="transport_icon_width">30dp</dimen>
     
 </resources>

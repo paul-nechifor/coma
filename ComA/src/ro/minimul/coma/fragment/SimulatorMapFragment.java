@@ -1,13 +1,13 @@
 package ro.minimul.coma.fragment;
 
 import java.util.Calendar;
-import java.util.Locale;
 import ro.minimul.coma.R;
 import ro.minimul.coma.routes.RouteUnit;
 import ro.minimul.coma.routes.Segment;
 import ro.minimul.coma.routes.SegmentsWalker;
 import ro.minimul.coma.routes.Station;
 import ro.minimul.coma.routes.TransportJsonData;
+import ro.minimul.coma.util.Util;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -156,7 +156,7 @@ public class SimulatorMapFragment extends MapFragment {
         String ret = "";
         
         if (departs != null) {
-            ret = "Departs: " + time(departs);
+            ret = "Departs: " + Util.getShortTime(departs);
         }
         
         if (arrives != null) {
@@ -164,15 +164,9 @@ public class SimulatorMapFragment extends MapFragment {
                 ret += "\n";
             }
             
-            ret += "Arrives: " +time(arrives);
+            ret += "Arrives: " + Util.getShortTime(arrives);
         }
         
         return ret;
-    }
-    
-    private String time(Calendar c) {
-        return String.format(Locale.getDefault(), "%02d:%02d",
-                c.get(Calendar.HOUR_OF_DAY),
-                c.get(Calendar.MINUTE));
     }
 }

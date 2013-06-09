@@ -3,6 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basic_background"
+    android:paddingTop="@dimen/route_vertical_margin"
+    android:paddingBottom="@dimen/route_vertical_margin"
     android:orientation="vertical" >
+    
+    <ListView
+        android:id="@+id/cardsLv"
+        android:listSelector="@color/basic_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

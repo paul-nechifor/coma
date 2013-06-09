@@ -33,6 +33,7 @@
                 android:id="@+id/transportOtherInfoTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_setting_small_color"
                 android:textIsSelectable="false"
                 android:textSize="@dimen/text_transport_size" />
         </LinearLayout>
@@ -44,7 +45,7 @@
 
         <TextView
             android:id="@+id/beginingIconTv"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/transport_icon_width"
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/begining_icon"
@@ -52,30 +53,64 @@
             android:textIsSelectable="false"
             android:gravity="left"
             android:textSize="@dimen/icon_label_size" />
+		
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/startStationTv"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textIsSelectable="false"
-            android:paddingRight="2dp"
-            android:gravity="left"
-            android:textSize="@dimen/text_transport_size" />
+		        <TextView
+		            android:id="@+id/startStationTv"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textIsSelectable="false"
+		            android:paddingRight="2dp"
+		            android:gravity="left"
+		            android:textSize="@dimen/text_transport_size" />
 
-        <TextView
-            android:id="@+id/endStationTv"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textIsSelectable="false"
-            android:paddingLeft="2dp"
-            android:gravity="right"
-            android:textSize="@dimen/text_transport_size" />
+		        <TextView
+		            android:id="@+id/startTimeTv"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textIsSelectable="false"
+		            android:paddingRight="2dp"
+		            android:gravity="left"
+                    android:textColor="@color/text_setting_small_color"
+		            android:textSize="@dimen/text_transport_size" />
+		        
+		    </LinearLayout>
+        
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+		        <TextView
+		            android:id="@+id/endStationTv"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textIsSelectable="false"
+		            android:paddingLeft="2dp"
+		            android:gravity="right"
+		            android:textSize="@dimen/text_transport_size" />
+
+		        <TextView
+		            android:id="@+id/endTimeTv"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:textIsSelectable="false"
+		            android:paddingLeft="2dp"
+		            android:gravity="right"
+                    android:textColor="@color/text_setting_small_color"
+		            android:textSize="@dimen/text_transport_size" />
+		        
+            </LinearLayout>
 
         <TextView
             android:id="@+id/endingIconTv"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/transport_icon_width"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="@string/ending_icon"

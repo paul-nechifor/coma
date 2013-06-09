@@ -61,7 +61,7 @@ public class StatisticsFragment extends Fragment {
         return ret;
     }
     
-    private SettingItem[] getItems() {
+    private SettingItem[] getItems() {        
         List<SettingItem> items = new ArrayList<SettingItem>();
         
         items.add(new NamedSeparator(R.string.label_time_spent));
@@ -87,8 +87,8 @@ public class StatisticsFragment extends Fragment {
         
         meters[0] = r(10000, 20000);
         meters[1] = r(10000, 20000);
-        meters[2] = r(0, 0);
-        meters[3] = r(10000, 20000);
+        meters[2] = r(10000, 20000);
+        meters[3] = r(0, 0);
         meters[4] = r(10000, 20000);
         
         seconds[0] = meters[0] / 25;

@@ -74,7 +74,7 @@
         </activity>
         
         <activity
-            android:name="ro.minimul.coma.activity.TrainSimulatorView"
+            android:name="ro.minimul.coma.activity.TrainSimulatorActivity"
             android:label="@string/train_simulator_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

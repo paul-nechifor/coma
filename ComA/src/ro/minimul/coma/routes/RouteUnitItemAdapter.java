@@ -1,8 +1,10 @@
 package ro.minimul.coma.routes;
 
+import java.util.Calendar;
 import java.util.List;
 import ro.minimul.coma.R;
 import ro.minimul.coma.activity.RouteSelectionActivity;
+import ro.minimul.coma.util.Util;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -35,10 +37,16 @@ public class RouteUnitItemAdapter extends ArrayAdapter<RouteUnit> {
                 (TextView) view.findViewById(R.id.transportNameTv);
         TextView transportOtherInfoTv =
                 (TextView) view.findViewById(R.id.transportOtherInfoTv);
+        
         TextView startStationTv = 
                 (TextView) view.findViewById(R.id.startStationTv);
         TextView endStationTv =
                 (TextView) view.findViewById(R.id.endStationTv);
+        
+        TextView startTimeTv = 
+                (TextView) view.findViewById(R.id.startTimeTv);
+        TextView endTimeTv =
+                (TextView) view.findViewById(R.id.endTimeTv);
         
         RouteUnit routeUnit = getItem(position);
         Transport tr = routeUnit.transport;
@@ -48,8 +56,11 @@ public class RouteUnitItemAdapter extends ArrayAdapter<RouteUnit> {
         startStationTv.setText(routeUnit.getStartStation());
         endStationTv.setText(routeUnit.getEndStation());
         
+        startTimeTv.setText(Util.getShortTime(routeUnit.startTime));
+        endTimeTv.setText(Util.getShortTime(routeUnit.endTime));
         
-        transportOtherInfoTv.setText("");
+        transportOtherInfoTv.setText(
+                delta(routeUnit.startTime, routeUnit.endTime));
 
         TextView beginingIconTv = 
                 (TextView) view.findViewById(R.id.beginingIconTv);
@@ -62,5 +73,19 @@ public class RouteUnitItemAdapter extends ArrayAdapter<RouteUnit> {
         endingIconTv.setTypeface(typeface);
         
         return view;
+    }
+    
+    private String delta(Calendar a, Calendar b) {
+        long t = (b.getTimeInMillis() - a.getTimeInMillis()) / 1000;
+        long m = t / 60;
+        
+        String ret = "";
+        if (m == 1) {
+            ret += m + " minute";
+        } else {
+            ret += m + " minutes";
+        }
+        
+        return ret;
     }
 }

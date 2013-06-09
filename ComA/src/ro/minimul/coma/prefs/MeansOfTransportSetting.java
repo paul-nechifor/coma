@@ -33,6 +33,7 @@ public class MeansOfTransportSetting extends SettingItem {
     @Override
     public View getView(int position, View convertView, ViewGroup parent,
             LayoutInflater inflater, Typeface typeface, Context context) {
+        
         View ret = inflater.inflate(R.layout.item_means_of_transport,
                 parent, false);
         
@@ -61,6 +62,8 @@ public class MeansOfTransportSetting extends SettingItem {
                 barV.invalidate();
             }
         });
+        ret.requestLayout();
+        ret.invalidate();
         
         return ret;
     }

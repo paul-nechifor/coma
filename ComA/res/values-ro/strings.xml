@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <string name="menu_routes">Rute</string>
+    <!--
+    <string name="menu_routes">Rute</string>
     <string name="menu_history">Istoric</string>
     <string name="menu_statistics">Statistici</string>
     <string name="menu_settings">Setări</string>
+    -->
 </resources>

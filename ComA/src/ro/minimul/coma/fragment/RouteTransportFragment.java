@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import ro.minimul.coma.R;
 import ro.minimul.coma.activity.RouteSelectionActivity;
-import ro.minimul.coma.activity.TrainSimulatorView;
+import ro.minimul.coma.activity.TrainSimulatorActivity;
 import ro.minimul.coma.routes.Route;
 import ro.minimul.coma.routes.RouteData;
 import ro.minimul.coma.routes.RouteUnit;
@@ -74,7 +74,9 @@ public class RouteTransportFragment extends Fragment {
                 new ArrayList<RouteUnit>());
         transportList.setAdapter(listAdapter);
         
+        statusTv.setVisibility(View.VISIBLE);
         workingPb.setVisibility(View.GONE);
+        transportList.setVisibility(View.GONE);
         
         if (route.getRouteData() != null) {
             listAdapter.clear();
@@ -127,28 +129,36 @@ public class RouteTransportFragment extends Fragment {
     }
     
     private void showWorking() {
-        statusTv.setText(R.string.label_computing_path);
+        statusTv.setVisibility(View.VISIBLE);
         workingPb.setVisibility(View.VISIBLE);
+        transportList.setVisibility(View.GONE);
+        
+        statusTv.setText(R.string.label_computing_path);
         workingPb.setActivated(true);
     }
     
     private void showFailed() {
+        statusTv.setVisibility(View.VISIBLE);
+        workingPb.setVisibility(View.GONE);
+        transportList.setVisibility(View.GONE);
+        
         statusTv.setText(R.string.label_problems_computing_path);
         
         activity.setRouteCalculationComplete(true);
         
         workingPb.setActivated(false);
-        workingPb.setVisibility(View.GONE);
     }
     
     private void showTransports(JSONObject result) {
+        statusTv.setVisibility(View.GONE);
+        workingPb.setVisibility(View.GONE);
+        transportList.setVisibility(View.VISIBLE);
+        
         activity.setRouteCalculationComplete(true);
         
         listAdapter.clear();
         
-        statusTv.setVisibility(View.GONE);
         workingPb.setActivated(false);
-        workingPb.setVisibility(View.GONE);
         
         RouteData routeData = null;
         try {
@@ -163,8 +173,8 @@ public class RouteTransportFragment extends Fragment {
     }
     
     private void openSimulatorFor(RouteUnit routeUnit) {
-        TrainSimulatorView.PASSING_CHEAT = routeUnit;
-        Intent intent = new Intent(activity, TrainSimulatorView.class);
+        TrainSimulatorActivity.PASSING_CHEAT = routeUnit;
+        Intent intent = new Intent(activity, TrainSimulatorActivity.class);
         activity.startActivity(intent);
     }
 }

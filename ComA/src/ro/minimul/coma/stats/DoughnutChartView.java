@@ -38,6 +38,14 @@ public class DoughnutChartView {
         0xFFffd75d,
     };
     
+    private static final String[] LABELS = {
+        "Sleeping",
+        "In transit",
+        "Other",
+        "At home",
+        "At work",
+    };
+    
     private DoughnutChartView() {
     }
     
@@ -100,11 +108,12 @@ public class DoughnutChartView {
 
     
     private static GraphicalView getTimeSpent(Context context) {
-        int[] values = { 1, 2, 3, 4, 5 };
+        int[] values = randomValues();
         CategorySeries series = new CategorySeries("");
         int k = 0;
         for (int value : values) {
-            series.add("Section " + ++k, value);
+            series.add(LABELS[k], value);
+            k++;
         }
 
         DefaultRenderer renderer = new DefaultRenderer();
@@ -115,8 +124,8 @@ public class DoughnutChartView {
             renderer.addSeriesRenderer(r);
         }
         
-        renderer.setLabelsTextSize(18);
-        renderer.setLabelsColor(0xFF000000);
+        renderer.setLabelsTextSize(22);
+        renderer.setLabelsColor(0xFF222222);
         renderer.setShowLegend(false);
         renderer.setZoomButtonsVisible(false);
         renderer.setExternalZoomEnabled(false);
@@ -132,5 +141,28 @@ public class DoughnutChartView {
         });
         
         return view;
+    }
+    
+    private static int[] randomValues() {
+        double left = 24000;
+        int[] ret = new int[5];
+        
+        ret[0] = (int) extract(left, 0.3, 0.33);
+        left -= ret[0];
+        ret[1] = (int) extract(left, 0.05, 0.1);
+        left -= ret[1];
+        ret[2] = (int) extract(left, 0.1, 0.15);
+        left -= ret[2];
+        ret[3] = (int) extract(left, 0.4, 0.6);
+        left -= ret[3];
+        ret[4] = (int) left;
+        
+        return ret;
+    }
+    
+    private static double extract(double left, double startRatio,
+            double endRatio) {
+        double ratio = Math.random() * (endRatio - startRatio) + startRatio;
+        return left * ratio;
     }
 }
